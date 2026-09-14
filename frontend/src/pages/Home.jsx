@@ -186,7 +186,7 @@ export default function Home() {
       {/* FLOAT */}
       <div className="owner-float-wrapper">
         <div className="owner-float">
-          <span className="owner-text">House Owner?</span>
+          <span className="owner-text">Enquire Now</span>
 
           <div className="owner-actions">
             <a href={`tel:+${PUBLIC_CONTACT_NUMBER}`} className="owner-call-btn">

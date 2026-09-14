@@ -227,7 +227,7 @@ export default function Details() {
 
       <div className="contact-bar">
         <a href={getCallHref()} className="call-btn">
-          <FaPhoneAlt /> Call Owner
+          <FaPhoneAlt /> Call
         </a>
 
         <a
