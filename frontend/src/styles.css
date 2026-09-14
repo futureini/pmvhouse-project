@@ -1,0 +1,47 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* BODY */
+body{
+  font-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  /* background:#E5E7EB; */
+  background:#000;
+}
+
+/* ✅ FULL WIDTH MOBILE SAFE */
+.app-container{
+  width:100%;
+  min-height:100vh;
+
+  background:#000000;
+
+  padding:12px;
+  padding-bottom:90px;
+}
+
+/* ✅ TABLET */
+@media (min-width:768px){
+  .app-container{
+    max-width:600px;
+    margin:auto;
+  }
+}
+
+/* ✅ DESKTOP */
+@media (min-width:1024px){
+  .app-container{
+    max-width:900px;
+    margin:auto;
+  }
+}
+
+/* SAFE IMAGE */
+img{
+  max-width:100%;
+  height:auto;
+  display:block;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "PMV Properties - Ponnamaravathy Property Marketplace",
+  "short_name": "PMV Properties",
+  "description": "Find houses for rent, lease, plots and showrooms in Ponnamaravathy.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f6f8",
+  "theme_color": "#b91c1c",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

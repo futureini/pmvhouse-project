@@ -1,0 +1,56 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent; /* removes the grey flash on tap — feels more native */
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background:#EDEFF2;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain; /* stops the page from dragging the browser chrome, app-like feel */
+}
+
+/* ROOT FIX */
+#root{
+  width:100%;
+  min-height:100vh;
+}
+
+/* LINKS */
+a{
+  text-decoration:none;
+}
+
+/* BUTTON RESET */
+button{
+  cursor:pointer;
+  border:none;
+  touch-action: manipulation; /* removes the ~300ms tap delay on older mobile browsers */
+}
+
+/* Consistent gentle fade/slide-in on every page's root container.
+   Every page already has one of these wrapper classes. */
+.main-container,
+.add-container,
+.admin-container,
+.login-container {
+  animation: pageFadeIn 0.35s ease both;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Safe-area padding so content never sits under a phone's home
+   indicator or notch */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}

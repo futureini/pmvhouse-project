@@ -1,0 +1,84 @@
+/* ========================= */
+/* BOTTOM NAVIGATION (native app style) */
+/* ========================= */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  display: flex;
+  background: #fff;
+
+  border-top: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 -6px 20px rgba(0,0,0,0.10);
+
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  background: transparent;
+  border: none;
+  padding: 8px 4px 10px;
+
+  color: #8d0505;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+
+.bottom-nav-btn:active {
+  transform: scale(0.92);
+}
+
+.bottom-nav-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 26px;
+  border-radius: 14px;
+  transition: background 0.2s ease;
+}
+
+.bottom-nav-icon {
+  font-size: 19px;
+}
+
+.bottom-nav-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.bottom-nav-btn.active {
+  color: #dc2626;
+}
+
+.bottom-nav-btn.active .bottom-nav-icon-wrap {
+  background: rgba(220, 38, 38, 0.12);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bottom-nav-btn:not(.active):hover {
+    color: #64748b;
+  }
+}
+
+/* Keep the bottom nav from stretching absurdly wide on tablets/desktop */
+@media (min-width: 768px) {
+  .bottom-nav {
+    max-width: 480px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    border-radius: 20px 20px 0 0;
+    border-left: 1px solid rgba(0,0,0,0.06);
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+}

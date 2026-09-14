@@ -1,0 +1,23 @@
+# Dependencies (huge, platform-specific — always reinstalled via `npm install`)
+node_modules/
+
+# Environment files — contain real secrets (DB password, JWT secret, Cloudinary keys)
+# Never commit these. .env.example files ARE committed, as templates.
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# Frontend production build output (generated fresh by Vercel on every deploy)
+frontend/dist/
+
+# Editor/OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

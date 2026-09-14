@@ -1,0 +1,490 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;   /* 🔥 FIX GAP */
+  background: #f4f6f8;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ========================= */
+/* MAIN */
+/* ========================= */
+.main-container {
+  /* Room for BOTH fixed elements stacked at the bottom: the bottom nav
+     AND the floating "House Owner?" bar above it (which is taller on
+     mobile, where it stacks its text/buttons vertically). Generous on
+     purpose so no card's "View Details" button ever ends up hidden
+     behind them, on any tab. */
+  padding: 0 12px calc(230px + env(safe-area-inset-bottom));
+}
+
+.list-heading {
+  margin: 16px 4px 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #334155;
+}
+
+/* ========================= */
+/* HEADER (NATIVE APP BAR) */
+/* ========================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: linear-gradient(135deg, #950505, #b91c1c);
+  padding: 10px 14px;
+  margin: 0 -12px 16px; /* cancel parent's side padding so this bar is truly edge-to-edge, like a native app top bar; bottom margin replaces the gap the old tab bar used to provide */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 14px rgba(185, 28, 28, 0.30);
+  padding-top: calc(10px + env(safe-area-inset-top));
+}
+
+/* Center column now holds only the responsive logo */
+.header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* White badge behind the logo so its flat white background reads as an
+   intentional card on the red header, not a broken cut-out. Width scales
+   fluidly between a mobile floor and a desktop ceiling. */
+.logo-badge {
+  width: clamp(150px, 46vw, 230px);
+  aspect-ratio: 2048 / 768;
+
+  background: #fff;
+  border-radius: 12px;
+  padding: 6px 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+.house-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+
+  margin-bottom: 16px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+  border: 1px solid rgba(0,0,0,0.04);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: cardFadeIn 0.4s ease both;
+}
+
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* subtle stagger for the first several cards */
+.house-card:nth-child(1) { animation-delay: 0.02s; }
+.house-card:nth-child(2) { animation-delay: 0.06s; }
+.house-card:nth-child(3) { animation-delay: 0.10s; }
+.house-card:nth-child(4) { animation-delay: 0.14s; }
+.house-card:nth-child(5) { animation-delay: 0.18s; }
+
+.house-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* IMAGE */
+.image-wrapper {
+  position: relative;
+}
+
+.house-image {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+/* BADGE */
+.pref-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  font-size: 11px;
+  padding: 5px 10px;
+
+  border-radius: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.pref-bachelor { background: #ff0000; }
+.pref-family { background: #ff006f; }
+.pref-both { background: #a855f7; }
+
+.verified-badge{
+  position:absolute;
+  top:10px;
+  left:10px;
+
+  background:#16a34a;
+  color:#fff;
+
+  padding:4px 10px;
+  border-radius:20px;
+
+  font-size:12px;
+  font-weight:600;
+
+  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ========================= */
+/* INFO */
+/* ========================= */
+.house-info {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-row h3 {
+  font-size: 15px;
+  font-weight: 700;
+
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* PRICE */
+.price {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff0000;
+
+  background: linear-gradient(135deg,#ffffff,#ffffff);
+
+  border-radius: 8px 8px;
+  border:1px solid #ff0000;
+  padding: 6px 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.price small {
+  font-size: 10px;
+}
+
+/* LOCATION */
+.location {
+  font-size: 13px;
+  color: #64748b;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* BUTTON ROW */
+.button-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.info-btn {
+  border: none;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  background: #f1f5f9;
+  color: #334155;
+}
+
+/* VIEW BUTTON */
+.details-btn {
+  margin-top: 8px;
+
+  background: linear-gradient(135deg,#e0342f,#ff0000);
+  color: #fff;
+
+  border: none;
+
+  padding: 12px;
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.details-btn:active {
+  transform: scale(0.96);
+}
+
+/* ========================= */
+/* FLOAT BAR */
+/* ========================= */
+.owner-float-wrapper {
+  position: fixed;
+  bottom: calc(70px + env(safe-area-inset-bottom)); /* sits just above the bottom nav bar */
+  left: 0;
+  width: 100%;
+  padding: 0 12px;
+  z-index: 900; /* below the bottom nav (1000) so nav stays on top when both are visible */
+}
+
+.owner-float {
+  max-width: 600px;
+  margin: auto;
+
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.9);
+
+  padding: 12px 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.owner-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.owner-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.owner-call-btn,
+.owner-whatsapp-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 10px 12px;
+  border-radius: 10px;
+
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+
+  color: #fff;
+}
+
+.owner-call-btn {
+  background: #dc2626;
+}
+
+.owner-whatsapp-btn {
+  background: #25d366;
+}
+
+.owner-call-btn:active,
+.owner-whatsapp-btn:active {
+  transform: scale(0.96);
+}
+
+/* ========================= */
+/* SKELETON */
+/* ========================= */
+.skeleton-img {
+  height: 180px;
+  background: linear-gradient(90deg,#eee,#ddd,#eee);
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 14px;
+  margin: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg,#eee,#ddd,#eee);
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text.small {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+/* ========================= */
+/* EMPTY STATE */
+/* ========================= */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 6px;
+  padding: 60px 20px;
+  color: #94a3b8;
+  animation: cardFadeIn 0.4s ease both;
+}
+
+.empty-icon {
+  font-size: 44px;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.empty-state p {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+
+.empty-state span {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .owner-float {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .owner-text {
+    text-align: center;
+  }
+
+  .owner-actions {
+    width: 100%;
+  }
+
+  .owner-call-btn,
+  .owner-whatsapp-btn {
+    flex: 1;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ========================= */
+/* HOVER (mouse / trackpad devices only — never triggers on touch,
+   so the mobile app feel is untouched on phones) */
+/* ========================= */
+@media (hover: hover) and (pointer: fine) {
+  .house-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.14);
+  }
+
+  .details-btn:hover {
+    filter: brightness(1.05);
+  }
+
+  .owner-call-btn:hover,
+  .owner-whatsapp-btn:hover {
+    filter: brightness(1.08);
+  }
+}
+
+/* ========================= */
+/* TABLET & DESKTOP */
+/* Cards flow into a responsive grid instead of stretching edge to
+   edge. Header/tabs/float bar stay full-width app bars. */
+/* ========================= */
+@media (min-width: 768px) {
+
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 120px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    align-items: start;
+    
+  }
+
+  /* app-bar style elements must span the full grid width */
+  .header,
+  .owner-float-wrapper {
+    grid-column: 1 / -1;
+  }
+
+  .header {
+    border-radius: 16px;
+    margin: 16px 0 0;
+  }
+
+  .house-card {
+    margin-bottom: 0;
+  }
+
+  .house-image {
+    height: 210px;
+  }
+
+  .owner-float {
+    max-width: 420px;
+    margin-right: 0;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-container {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+}

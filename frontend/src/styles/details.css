@@ -1,0 +1,543 @@
+/* ========================= */
+/* GLOBAL */
+/* ========================= */
+*{
+  box-sizing:border-box;
+}
+
+body{
+  background:#F4F6F8;
+  font-family:system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.app-container{
+  position: relative; /* anchors the floating back button over the hero image */
+  padding-bottom: calc(90px + env(safe-area-inset-bottom)); /* room for sticky Call/WhatsApp bar */
+  animation: detailsFadeIn 0.35s ease both;
+}
+
+@keyframes detailsFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================= */
+/* BACK (floats over the hero image, native app style) */
+/* ========================= */
+.back-button{
+  position:absolute;
+  top:calc(12px + env(safe-area-inset-top));
+  left:12px;
+  z-index:20;
+  cursor:pointer;
+}
+
+.back-button span{
+  display:none; /* icon-only floating button, like native apps */
+}
+
+.back-icon{
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(6px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+  color:#1e293b;
+  transition:transform 0.1s ease;
+}
+
+.back-icon:active{
+  transform:scale(0.9);
+}
+
+/* ========================= */
+/* 🔥 SLIDER FIX */
+/* ========================= */
+.slider{
+  position:relative;
+  overflow:hidden; /* ✅ FIX */
+}
+
+.details-image{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  border-radius:12px;
+  position:relative;
+  z-index:1;
+}
+
+/* ========================= */
+/* 🔥 NAV BUTTON FIX (ALWAYS VISIBLE) */
+/* ========================= */
+.nav-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.7);
+  color:#fff;
+  border:none;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  cursor:pointer;
+
+  z-index:9999; /* 🔥 MAIN FIX */
+  pointer-events:auto;
+
+  backdrop-filter:blur(4px);
+}
+
+.nav-btn.left{ left:12px; }
+.nav-btn.right{ right:12px; }
+
+/* ========================= */
+/* 🔥 POPUP FULL FIX */
+/* ========================= */
+.image-popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+
+  z-index:99999;
+
+  display:block; /* 🔥 FIX (no flex issue) */
+}
+
+/* CENTER IMAGE */
+.image-popup img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  max-width:90%;
+  max-height:80%;
+  border-radius:10px;
+  z-index:10;
+}
+
+/* ========================= */
+/* 🔥 POPUP BUTTON FIX */
+/* ========================= */
+.popup-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#111;
+  color:#fff;
+  border:none;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  font-size:24px;
+  cursor:pointer;
+
+  z-index:999999; /* 🔥 FIX */
+}
+
+.popup-btn.left{ left:20px; }
+.popup-btn.right{ right:20px; }
+
+/* CLOSE */
+.close-btn{
+  position:absolute;
+  top:20px;
+  right:20px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+  z-index:999999;
+}
+
+/* ===================== */
+/* INFO CARD */
+/* ===================== */
+.details-card{
+  background:#fff;
+  padding:16px;
+  border-radius:14px;
+  margin-top:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+/* Fix a global class-name collision with home.css's ".title-row h3"
+   (which truncates card titles with an ellipsis — fine for a list,
+   but was cutting off full titles here). Higher specificity wins
+   regardless of CSS load order. */
+.details-card .title-row h3{
+  font-size:17px;
+  white-space:normal;
+  overflow:visible;
+  text-overflow:unset;
+  line-height:1.3;
+}
+
+/* ===================== */
+/* INFO ROW */
+/* ===================== */
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px;
+  border-radius:10px;
+  background:#ffe4e4;
+  border:1px solid #f9cbcb;
+  margin-bottom:10px;
+}
+
+.info-row:hover{
+  background:#f09d9d;
+}
+
+.label{
+  font-size:13px;
+  color:#000000;
+  font-weight:500;
+}
+
+.value{
+  font-size:14px;
+  font-weight:600;
+  color:#8d0505;
+}
+
+.highlight{
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+}
+
+.value.rent{
+  color:#16a34a;
+  font-weight:700;
+  font-size:16px;
+}
+
+/* ============================= */
+/* HOUSE DETAILS */
+/* ============================= */
+.house-details{
+  background:#fff;
+  padding:16px;
+  border-radius:14px;
+  margin-top:14px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.06);
+}
+
+.section-title{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:12px;
+  color:#8d0505;
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.detail-box{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  border:1px solid #eef2f7;
+  transition:0.2s ease;
+}
+
+.detail-box:hover{
+  transform:translateY(-2px);
+  background:#f1f5f9;
+}
+
+.fa-icon{
+  font-size:24px;
+  color:#dc2626;
+}
+
+.detail-label{
+  font-size:12px;
+  color:#8d0505;
+  font-weight:500;
+}
+
+.detail-value{
+  font-size:16px;
+  font-weight:700;
+  color:#8d0505;
+}
+
+/* ===================== */
+/* STICKY CONTACT BAR (native detail-screen CTA pattern) */
+/* ===================== */
+.contact-bar{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1000;
+
+  display:flex;
+  gap:10px;
+
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(10px);
+
+  padding:12px 14px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom));
+
+  box-shadow:0 -6px 20px rgba(0,0,0,0.10);
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+
+.call-btn,
+.whatsapp-btn{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:13px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+  font-size:14px;
+  transition:transform 0.1s ease;
+}
+
+.call-btn:active,
+.whatsapp-btn:active{
+  transform:scale(0.96);
+}
+
+.call-btn{
+  background:#dc2626;
+  color:white;
+}
+
+.whatsapp-btn{
+  background:#25D366;
+  color:white;
+}
+
+/* ===================== */
+/* DOTS */
+/* ===================== */
+.dots{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:6px;
+  z-index:9999;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.5);
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+
+.dot.active{
+  background:#fff;
+  width:16px;
+  border-radius:10px;
+}
+
+.popup-dots{
+  bottom:20px;
+}
+
+/* ========================= */
+/* MATCH HOME STYLE */
+/* ========================= */
+.title-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.title-row h3{
+  font-size:16px;
+  font-weight:700;
+  flex:1;
+  color:#8d0505;
+}
+
+.price{
+  font-size:14px;
+  font-weight:700;
+  color:#ff0000;
+  background:#fff;
+  border-radius:8px;
+  padding:6px 10px;
+  display:flex;
+  align-items:center;
+  gap:4px;
+  white-space:nowrap;
+}
+
+.price small{
+  font-size:10px;
+}
+
+.location{
+  font-size:13px;
+  color:#ff0000;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+}
+
+.button-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.info-btn{
+  border:none;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  /* background:#8d0505; */
+  border: 1px solid #8d0505;
+  color: #8d0505;
+}
+
+/* ========================= */
+/* MOBILE IMPROVEMENT */
+/* ========================= */
+@media (max-width:480px){
+
+  .nav-btn{
+    width:38px;
+    height:38px;
+    font-size:20px;
+  }
+
+  .popup-btn{
+    width:44px;
+    height:44px;
+  }
+
+}
+/* ========================= */
+/* SKELETON LOADING */
+/* ========================= */
+
+.skeleton-image{
+  width:100%;
+  height:200px;
+  border-radius:12px;
+  background:linear-gradient(90deg,#eee,#ddd,#eee);
+  animation:shimmer 1.2s infinite;
+}
+
+.skeleton-card{
+  height:80px;
+  margin-top:12px;
+  border-radius:12px;
+  background:linear-gradient(90deg,#eee,#ddd,#eee);
+  animation:shimmer 1.2s infinite;
+}
+
+@keyframes shimmer{
+  0%{background-position:-200px 0;}
+  100%{background-position:200px 0;}
+}
+
+/* ========================= */
+/* ERROR PAGE */
+/* ========================= */
+
+.error-page{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+}
+
+.error-page button{
+  padding:10px 16px;
+  border:none;
+  background:#dc2626;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+}
+.details-image {
+  width: 100%;
+  height: 250px; /* ✅ FIX HEIGHT */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .details-image {
+    height: 400px;
+  }
+
+  .contact-bar {
+    max-width: 720px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    border-radius: 16px 16px 0 0;
+    border-left: 1px solid rgba(0,0,0,0.06);
+    border-right: 1px solid rgba(0,0,0,0.06);
+  }
+}
+
+.image-popup img {
+  max-width: 95%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+/* ========================= */
+/* HOVER (mouse/trackpad only — doesn't affect mobile touch feel) */
+/* Note: responsive max-width for .app-container on tablet/desktop
+   is already handled globally in styles.css */
+/* ========================= */
+@media (hover: hover) and (pointer: fine) {
+  .nav-btn:hover,
+  .popup-btn:hover {
+    background: rgba(0,0,0,0.85);
+  }
+
+  .call-btn:hover,
+  .whatsapp-btn:hover {
+    filter: brightness(1.05);
+  }
+
+  .back-icon:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.14);
+  }
+}
